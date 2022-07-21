@@ -26,6 +26,7 @@ int main(){
     long long int l,r,m;
     long long int mv;
     cin>>tC;
+    //hola
     for(int tc =1; tc<= tC; tc++){
         peld.clear();
         peld.push_back(0);
