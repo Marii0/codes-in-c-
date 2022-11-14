@@ -11,23 +11,21 @@ void dfs(int node)
     visited[node] = 1;
 
     // inorder
-    for (auto it = adj[node].begin(); it != adj[node].end(); it++)
+    for (int i : adj[node])
     {
-        if (visited[*it])
+        if (!visited[i])
         {
-        }
-        else
-        {
-            dfs(*it);
+            dfs(i);
         }
     }
 
     // postorder
+    cout << node << " ";
 }
 
 int main()
 {
-    int max, x, y, cont = 0;
+    int max, x, y;
 
     cin >> max;
 
@@ -42,14 +40,5 @@ int main()
         adj[y].push_back(x);
     }
 
-    for (int i = 1; i <= max; i++)
-    {
-
-        if (visited[i] != 1)
-        {
-            dfs(i);
-            cont++;
-        }
-    }
-    cout << cont << endl;
+    dfs(1);
 }

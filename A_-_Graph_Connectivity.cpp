@@ -1,7 +1,7 @@
 #include "bits/stdc++.h"
 using namespace std;
 
-const int N = 26;
+const int N = 1000;
 bool visited[N];
 vector<char> adj[N];
 
@@ -11,63 +11,64 @@ void dfs(char node)
     visited[node] = 1;
 
     // inorder
-    for (auto it = adj[node].begin(); it != adj[node].end(); it++)
+    for (int i : adj[node])
     {
-        if (visited[*it])
+        if (!visited[i])
         {
-        }
-        else
-        {
-            dfs(*it);
+            dfs(i);
         }
     }
 
     // postorder
-    
 }
 
 int main()
 {
+
     int tc;
-    cin>>tc;
+    cin >> tc;
+    cin.ignore();
     while (tc--)
     {
         char max, x, y;
-        int cont=0;
+        int cont = 0;
+        string input;
 
         cin >> max;
+        cin.ignore();
 
-        for (int i = 'A'; i <= max; i++)
+        for (char i = 'A'; i <= max; i++)
         {
             visited[i] = false;
         }
-
-        while (cin>>x>>y)
+        for (int i = 'A'; i <= max; i++)
         {
-            adj[x].push_back(y);
-            adj[y].push_back(x); 
+            adj[i].clear();
         }
-        
 
-        for (int i = 'A'; i<=max; i++)
+        while (getline(cin, input), input.size() != 0)
+        {
+            adj[input[0]].push_back(input[1]);
+            adj[input[1]].push_back(input[0]);
+        }
+
+        for (char i = 'A'; i <= max; i++)
         {
 
-            if(visited[i]!=1){
+            if (visited[i] != 1)
+            {
                 dfs(i);
                 cont++;
             }
-            
-
         }
-        cout << cont << endl;
-        for (int i = 'A'; i <= 'Z'; i++)
+        if (tc == 0)
         {
-            adj[i].clear();   
+            cout << cont << endl;
         }
-        
+        else
+        {
+            cout << cont << endl
+                 << endl;
+        }
     }
-    
-    
-    
 }
-
